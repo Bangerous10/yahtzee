@@ -1,0 +1,127 @@
+@import 'materialize';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Saira+Semi+Condensed:400,700,900');
+
+// CONSTANTS ===============================================================================================
+* {font-family:'Open Sans', sans-serif;}
+h1,h2,h3,h4,h5,h6 {font-family:'Saira Semi Condensed', sans-serif;}
+
+$gray: rgb(80,80,80);
+$saira: 'Saira Semi Condensed', sans-serif;
+
+@mixin subtitle {
+  font:900 0.8rem 'Saira Semi Condensed';
+  text-transform:uppercase;
+}
+
+body {
+  margin:0;
+  position:relative;
+  background:linear-gradient(to bottom, white, rgb(207, 207, 207));
+}
+
+.row {
+  margin:auto;
+  // DICE ====================================================================================================
+  .dice-container {
+    padding:1rem;
+    position:fixed;
+    top:15%;
+    left:0;
+    border:1px solid $gray;
+    border-left:0;
+    display:flex;
+    flex-flow:column wrap;
+    justify-content:space-evenly;
+    align-items:center;
+    align-content:flex-start;
+    button {
+      background-color:$gray;
+      color:white;
+      font-weight:900;
+      margin-bottom:0.5rem;
+    }
+    .roll-count-container {
+      color:$gray;
+      @include subtitle;
+      .divide {margin:0 0.5rem;}
+    }
+    .dice {
+      height:50px;
+      width:50px;
+      margin:1rem 0;
+      position:relative;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:contain;
+      cursor:pointer;
+      z-index:1;
+      transition:0.3s ease;
+      i {
+        display:none;
+        color:$primary-color;
+        position:absolute;
+        top:2px;
+        left:-17px;
+      }
+      &.saved i {display:inline-block;}
+    }
+  }
+
+  // SCORES ==================================================================================================
+  .score-section {
+    table {
+      margin:3rem auto;
+      tr {
+        td, th {
+          &:first-child {width:20%;}
+          &:nth-child(2) {width:20%;}
+          &:last-child {width:30%;}
+        }
+        th {@include subtitle;}
+      }
+      tfoot {
+        td {
+          padding:5px;
+          border-bottom:1px solid #d0d0d0;
+          &:nth-child(2) {
+            @include subtitle;
+          }
+        }
+      }
+    }
+  }
+}
+#game-over {
+  width:75%;
+  .upper-total-container, .lower-total-container, .grand-total-container {
+    float:left;
+    text-align:center;
+    @include subtitle;
+    .total {font:900 5rem $saira;}
+    .grand-total {
+      font-size:7rem;
+      position:relative;
+      width:14rem;
+      height:14rem;
+      line-height:14rem;
+      margin:0 auto 2rem auto;
+      background-color:$primary-color;
+      border-radius:50%;
+      &::after {
+        content:'';
+        position:absolute;
+        height:100%;
+        width:100%;
+        border-radius:50%;
+        border-left:5px solid $primary-color-light;
+        top:0;
+        left:0;
+        animation: spin 2s infinite;
+        @keyframes spin {
+          from {transform: rotate(0deg);}
+          to {transform: rotate(360deg);}
+        }
+      }
+    }
+  }
+}
